@@ -9,6 +9,18 @@ from models.base_model import BaseModel
 class TestBaseModel(unittest.TestCase):
     """Test cases for the BaseModel class"""
 
+    def test_no_args_instantiates(self):
+        """Test no arguments"""
+        self.assertEqual(BaseModel, type(BaseModel()))
+    def test_id_is_public_str(self):
+        """Test id"""
+        self.assertEqual(str, type(BaseModel().id))
+    def test_created_at_is_public_datetime(self):
+        """Test created at"""
+        self.assertEqual(datetime, type(BaseModel().created_at))
+    def test_updated_at_is_public_datetime(self):
+        """Test updated at"""
+        self.assertEqual(datetime, type(BaseModel().updated_at))
     def test_init(self):
         """Test initialization of BaseModel instance"""
         base_model_instance = BaseModel()
