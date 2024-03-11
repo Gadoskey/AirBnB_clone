@@ -5,17 +5,18 @@ import unittest
 from models.base_model import BaseModel
 from datetime import datetime
 
+
 class TestBaseModel(unittest.TestCase):
     """Test cases for the BaseModel class"""
-    
+
     def setUp(self):
         """Set up test environment"""
         self.model = BaseModel()
-    
+
     def tearDown(self):
         """Tear down test environment"""
         del self.model
-        
+
     def test_id_generation(self):
         """Test if a unique id is generated for each BaseModel instance"""
         other_model = BaseModel()
