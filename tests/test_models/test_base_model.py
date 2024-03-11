@@ -1,9 +1,12 @@
 #!/usr/bin/python3
 """Defines unittests for BaseModel class"""
 
+import os
+import models
 import unittest
-from models.base_model import BaseModel
 from datetime import datetime
+from time import sleep
+from models.base_model import BaseModel
 
 
 class TestBaseModel(unittest.TestCase):
