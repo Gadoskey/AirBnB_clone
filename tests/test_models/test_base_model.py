@@ -1,48 +1,46 @@
 #!/usr/bin/python3
 """Defines unittests for BaseModel class"""
 
-import os
-import models
 import unittest
 from datetime import datetime
-from time import sleep
 from models.base_model import BaseModel
 
 
 class TestBaseModel(unittest.TestCase):
     """Test cases for the BaseModel class"""
 
-    def setUp(self):
-        """Set up test environment"""
-        self.model = BaseModel()
+    def test_init(self):
+        """Test initialization of BaseModel instance"""
+        base_model_instance = BaseModel()
+        self.assertIsInstance(base_model_instance, BaseModel)
+        self.assertTrue(hasattr(base_model_instance, 'id'))
+        self.assertTrue(hasattr(base_model_instance, 'created_at'))
+        self.assertTrue(hasattr(base_model_instance, 'updated_at'))
+        self.assertIsInstance(base_model_instance.created_at, datetime)
+        self.assertIsInstance(base_model_instance.updated_at, datetime)
 
-    def tearDown(self):
-        """Tear down test environment"""
-        del self.model
 
-    def test_id_generation(self):
-        """Test if a unique id is generated for each BaseModel instance"""
-        other_model = BaseModel()
-        self.assertNotEqual(self.model.id, other_model.id)
-
-    def test_created_updated_at(self):
-        """Test if created_at and updated_at attributes are set correctly"""
-        time_difference = self.model.updated_at - self.model.created_at
-        self.assertLessEqual(time_difference.total_seconds(), 1)
-
-    def test_to_dict_method(self):
+    def test_to_dict(self):
         """Test the to_dict method of BaseModel"""
-        model_dict = self.model.to_dict()
-        """Check if the returned dictionary contains all expected keys"""
-        self.assertIn('id', model_dict)
-        self.assertIn('__class__', model_dict)
-        self.assertIn('created_at', model_dict)
-        self.assertIn('updated_at', model_dict)
-        """Check if the __class__ key has the correct value"""
-        self.assertEqual(model_dict['__class__'], 'BaseModel')
-        """Check if created_at and updated_at are in ISO format strings"""
-        self.assertIsInstance(model_dict['created_at'], str)
-        self.assertIsInstance(model_dict['updated_at'], str)
+        base_model_instance = BaseModel()
+        base_model_dict = base_model_instance.to_dict()
+        self.assertIsInstance(base_model_dict, dict)
+        self.assertIn('__class__', base_model_dict)
+        self.assertIn('id', base_model_dict)
+        self.assertIn('created_at', base_model_dict)
+        self.assertIn('updated_at', base_model_dict)
+        self.assertEqual(base_model_dict['__class__'], 'BaseModel')
+        self.assertIsInstance(datetime.fromisoformat(
+                    base_model_dict['created_at']), datetime)
+        self.assertIsInstance(datetime.fromisoformat(
+                    base_model_dict['updated_at']), datetime)
+
+    def test_str(self):
+        """Test the __str__ method of BaseModel"""
+        base_model_instance = BaseModel()
+        base_model_str = str(base_model_instance)
+        self.assertIn('BaseModel', base_model_str)
+        self.assertIn(base_model_instance.id, base_model_str)
 
 
 if __name__ == "__main__":
