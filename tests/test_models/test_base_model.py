@@ -2,6 +2,7 @@
 """Defines unittests for BaseModel class"""
 
 import unittest
+from time import sleep
 from datetime import datetime
 from models.base_model import BaseModel
 
@@ -25,6 +26,26 @@ class TestBaseModel(unittest.TestCase):
         """Test updated at"""
         self.assertEqual(datetime, type(BaseModel().updated_at))
 
+    def test_two_models_different_created_at(self):
+        """Test two models"""
+        base_model_instance1 = BaseModel()
+        base_model_instance2 = BaseModel()
+        self.assertNotEqual(base_model_instance1.id, base_model_instance2.id)
+
+    def test_two_models_different_created_at(self):
+        """Test two modes"""
+        b_m_instance1 = BaseModel()
+        sleep(0.05)
+        b_m_instance2 = BaseModel()
+        self.assertLess(b_m_instance1.created_at, b_m_instance2.created_at)
+
+    def test_two_models_different_created_at(self):
+        """Test two modes"""
+        b_m_instance1 = BaseModel()
+        sleep(0.05)
+        b_m_instance2 = BaseModel()
+        self.assertLess(b_m_instance1.updated_at, b_m_instance2.updated_at)
+
     def test_init(self):
         """Test initialization of BaseModel instance"""
         base_model_instance = BaseModel()
@@ -34,6 +55,15 @@ class TestBaseModel(unittest.TestCase):
         self.assertTrue(hasattr(base_model_instance, 'updated_at'))
         self.assertIsInstance(base_model_instance.created_at, datetime)
         self.assertIsInstance(base_model_instance.updated_at, datetime)
+
+    def test_instantiation_with_kwargs(self):
+        """Test kwargs"""
+        dt = datetime.today()
+        dt_iso = dt.isoformat()
+        bm = BaseModel(id="345", created_at=dt_iso, updated_at=dt_iso)
+        self.assertEqual(bm.id, "345")
+        self.assertEqual(bm.created_at, dt)
+        self.assertEqual(bm.updated_at, dt)
 
     def test_to_dict(self):
         """Test the to_dict method of BaseModel"""
