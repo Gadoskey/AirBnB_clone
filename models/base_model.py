@@ -1,13 +1,11 @@
 #!/usr/bin/python3
 
-"""Class Basemodel"""
-
 from uuid import uuid4
 from datetime import datetime
 
 
 class BaseModel:
-    """Defines a class BaseModel"""
+    """Class BaseModel"""
 
     def __init__(self, *args, **kwargs):
         """Initializes a BaseModel instance"""

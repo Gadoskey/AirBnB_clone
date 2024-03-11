@@ -12,15 +12,19 @@ class TestBaseModel(unittest.TestCase):
     def test_no_args_instantiates(self):
         """Test no arguments"""
         self.assertEqual(BaseModel, type(BaseModel()))
+
     def test_id_is_public_str(self):
         """Test id"""
         self.assertEqual(str, type(BaseModel().id))
+
     def test_created_at_is_public_datetime(self):
         """Test created at"""
         self.assertEqual(datetime, type(BaseModel().created_at))
+
     def test_updated_at_is_public_datetime(self):
         """Test updated at"""
         self.assertEqual(datetime, type(BaseModel().updated_at))
+
     def test_init(self):
         """Test initialization of BaseModel instance"""
         base_model_instance = BaseModel()
@@ -30,7 +34,6 @@ class TestBaseModel(unittest.TestCase):
         self.assertTrue(hasattr(base_model_instance, 'updated_at'))
         self.assertIsInstance(base_model_instance.created_at, datetime)
         self.assertIsInstance(base_model_instance.updated_at, datetime)
-
 
     def test_to_dict(self):
         """Test the to_dict method of BaseModel"""
