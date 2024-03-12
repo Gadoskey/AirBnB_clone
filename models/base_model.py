@@ -21,6 +21,8 @@ class BaseModel:
         self.updated_at = datetime.today()
         if kwargs:
             for key, value in kwargs.items():
+                if key == '__class__':
+                    continue
                 if key == "created_at" or key == "updated_at":
                     setattr(self, key, datetime.strptime(value, t_f))
                 else:
@@ -36,13 +38,13 @@ class BaseModel:
         Includes the key/value pair __class__ representing
         the class name of the object.
         """
-        rdict = self.__dict__.copy()
-        rdict["created_at"] = self.created_at.isoformat()
-        rdict["updated_at"] = self.updated_at.isoformat()
-        rdict["__class__"] = self.__class__.__name__
-        return rdict
+        model_dict = self.__dict__.copy()
+        model_dict["created_at"] = self.created_at.isoformat()
+        model_dict["updated_at"] = self.updated_at.isoformat()
+        model_dict["__class__"] = self.__class__.__name__
+        return model_dict
 
     def __str__(self):
         """Return the print/str representation of the BaseModel instance."""
-        clname = self.__class__.__name__
-        return "[{}] ({}) {}".format(clname, self.id, self.__dict__)
+        cls_name = self.__class__.__name__
+        return "[{}] ({}) {}".format(cls_name, self.id, self.__dict__)
