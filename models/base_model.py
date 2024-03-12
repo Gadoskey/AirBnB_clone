@@ -6,7 +6,7 @@ from datetime import datetime
 
 
 class BaseModel:
-    """Represents the BaseModel of the HBnB project."""
+    """Class BaseModel."""
 
     def __init__(self, *args, **kwargs):
         """Initialize a new BaseModel.
@@ -22,7 +22,7 @@ class BaseModel:
         if kwargs:
             for key, value in kwargs.items():
                 if key == "created_at" or key == "updated_at":
-                    setattr(self, key, datetime.strptime(v, t_f))
+                    setattr(self, key, datetime.strptime(value, t_f))
                 else:
                     setattr(self, key, value)
 
