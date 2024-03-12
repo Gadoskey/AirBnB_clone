@@ -9,7 +9,7 @@ class BaseModel:
     """Class BaseModel."""
 
     def __init__(self, *args, **kwargs):
-        """Initialize a new BaseModel.
+        """Initialize new public instances of Class BaseModel.
 
         Args:
             *args (any): Unused.
@@ -33,7 +33,7 @@ class BaseModel:
         self.updated_at = datetime.today()
 
     def to_dict(self):
-        """Return the dictionary of the BaseModel instance.
+        """Returns the dictionary of the BaseModel instance.
 
         Includes the key/value pair __class__ representing
         the class name of the object.
@@ -45,6 +45,6 @@ class BaseModel:
         return model_dict
 
     def __str__(self):
-        """Return the print/str representation of the BaseModel instance."""
+        """Returns the string representation of the BaseModel instance."""
         cls_name = self.__class__.__name__
         return "[{}] ({}) {}".format(cls_name, self.id, self.__dict__)
