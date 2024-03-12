@@ -23,9 +23,9 @@ class BaseModel:
         if kwargs:
             for key, value in kwargs.items():
                 if key == "created_at" or key == "updated_at":
-                    self.__dict__[key] = datetime.strptime(value, t_f)
+                    setattr(self, key, datetime.strptime(value, t_f))
                 else:
-                    self.__dict__[key] = value
+                    setattr(self, key, value)
 
     def save(self):
         """Updates the updated_at attribute with the current datetime"""
