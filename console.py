@@ -105,27 +105,35 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         class_name = args[0]
-        if class_name not in storage.classes():
+        if class_name not in ["BaseModel"]:
             print("** class doesn't exist **")
             return
         if len(args) < 2:
             print("** instance id missing **")
             return
         instance_id = args[1]
-        key = f"{class_name}.{instance_id}"
+        key = class_name + "." + instance_id
         if key not in storage.all():
             print("** no instance found **")
             return
         if len(args) < 3:
             print("** attribute name missing **")
             return
+        attribute_name = args[2]
         if len(args) < 4:
             print("** value missing **")
             return
-        attribute_name = args[2]
         attribute_value = args[3]
-        setattr(storage.all()[key], attribute_name, attribute_value)
-        storage.save()
+        obj = storage.all()[key]
+        if hasattr(obj, attribute_name):
+            attr_type = type(getattr(obj, attribute_name))
+            try:
+                setattr(obj, attribute_name, attr_type(attribute_value))
+                obj.save()
+            except ValueError:
+                print("** invalid value **")
+        else:
+            print("** attribute doesn't exist **")
 
 
 if __name__ == "__main__":
