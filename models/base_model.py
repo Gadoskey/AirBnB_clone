@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 """Defines the BaseModel class."""
+import models
 from uuid import uuid4
 from datetime import datetime
 
@@ -27,10 +28,12 @@ class BaseModel:
                     setattr(self, key, datetime.strptime(value, t_f))
                 else:
                     setattr(self, key, value)
-
+        if not kwargs:
+            models.storage.new(self)
     def save(self):
         """Update updated_at with the current datetime."""
         self.updated_at = datetime.today()
+        models.storage.save()
 
     def to_dict(self):
         """Returns the dictionary of the BaseModel instance.
