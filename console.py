@@ -21,6 +21,8 @@ class HBNBCommand(cmd.Cmd):
 
     prompt = "(hbnb) "
 
+    __classes = {"BaseModel", "User", "State", "City", "Place", "Amenity", "Review"}
+
     def emptyline(self):
         """Do nothing when an empty line is received."""
         pass
@@ -41,7 +43,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         class_name = args[0]
-        if class_name not in ["BaseModel", "User"]:
+        if class_name not in self.__classes:
             print("** class doesn't exist **")
             return
         new_instance = eval(class_name)()
@@ -55,7 +57,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         class_name = args[0]
-        if class_name not in ["BaseModel", "User"]:
+        if class_name not in self.__classes:
             print("** class doesn't exist **")
             return
         if len(args) < 2:
@@ -75,7 +77,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         class_name = args[0]
-        if class_name not in ["BaseModel", "User"]:
+        if class_name not in self.__classes:
             print("** class doesn't exist **")
             return
         if len(args) < 2:
@@ -96,7 +98,7 @@ class HBNBCommand(cmd.Cmd):
             print([str(obj) for obj in storage.all().values()])
             return
         class_name = args[0]
-        if class_name not in ["BaseModel", "User"]:
+        if class_name not in self.__classes:
             print("** class doesn't exist **")
             return
         print([str(obj) for key, obj in storage.all(
@@ -111,7 +113,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         class_name = args[0]
-        if class_name not in ["BaseModel", "User"]:
+        if class_name not in self.__classes:
             print("** class doesn't exist **")
             return
         if len(args) < 2:
