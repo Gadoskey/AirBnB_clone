@@ -101,8 +101,11 @@ class HBNBCommand(cmd.Cmd):
         if class_name not in self.__classes:
             print("** class doesn't exist **")
             return
-        print([str(obj) for key, obj in storage.all(
-                    ).items() if class_name in key])
+        instances = []
+        for obj_key, obj in storage.all().items():
+            if obj_key.split('.')[0] == class_name:
+                instances.append(str(obj))
+        print(instances)
 
     def do_update(self, arg):
         """Update an instance based on the class name
