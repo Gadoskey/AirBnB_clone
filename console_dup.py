@@ -41,10 +41,10 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         class_name = args[0]
-        if class_name not in ["BaseModel", "User"]:
+        if class_name not in ["BaseModel"]:
             print("** class doesn't exist **")
             return
-        new_instance = eval(class_name)()
+        new_instance = BaseModel()
         new_instance.save()
         print(new_instance.id)
 
@@ -55,7 +55,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         class_name = args[0]
-        if class_name not in ["BaseModel", "User"]:
+        if class_name not in ["BaseModel"]:
             print("** class doesn't exist **")
             return
         if len(args) < 2:
@@ -75,7 +75,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         class_name = args[0]
-        if class_name not in ["BaseModel", "User"]:
+        if class_name not in ["BaseModel"]:
             print("** class doesn't exist **")
             return
         if len(args) < 2:
@@ -96,7 +96,7 @@ class HBNBCommand(cmd.Cmd):
             print([str(obj) for obj in storage.all().values()])
             return
         class_name = args[0]
-        if class_name not in ["BaseModel", "User"]:
+        if class_name not in ["BaseModel"]:
             print("** class doesn't exist **")
             return
         print([str(obj) for key, obj in storage.all(
@@ -111,7 +111,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         class_name = args[0]
-        if class_name not in ["BaseModel", "User"]:
+        if class_name not in ["BaseModel"]:
             print("** class doesn't exist **")
             return
         if len(args) < 2:
